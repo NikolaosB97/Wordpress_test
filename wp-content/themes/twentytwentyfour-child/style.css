@@ -1,0 +1,697 @@
+/*
+Theme Name: Portfolio Theme
+Theme URI: http://localhost:8888/wordpress_test/
+Author: Nicola
+Author URI: http://localhost:8888/wordpress_test/
+Description: Un tema portfolio minimal per WordPress
+Version: 1.0
+*/
+
+
+ /* Stile base per la navbar */
+ .transparent-bg {
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+  
+  .scrolled {
+    background-color: rgba(30, 30, 30, 0.9);
+  }
+  
+  .navbar-brand img {
+    max-height: 50px;
+  }
+  
+  .navbar-message {
+    font-size: 1.1rem;
+    color: #00ff00;
+    display: flex;
+    align-items: center;
+  }
+
+  
+  #dynamic-message {
+    font-family: 'Fira Code', monospace;
+    font-weight: 500;
+    color: #00ff00;
+  }
+  
+  #cursor {
+    display: inline-block;
+    background-color: #00ff00;
+    width: 10px;
+    margin-left: 5px;
+    animation: blink 1s infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  /* Stile generale del footer */
+footer {
+    padding: 20px;
+    background-color:#4d4357; /* bg-body-tertiary */
+    color: #6c757d; /* text-muted */
+    overflow: auto; /* Assicura che il footer possa scorrere */
+}
+
+footer .section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    flex-grow: 1; /* Permette al contenuto di crescere */
+}
+
+footer .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%; /* Assicura che la riga occupi tutta la larghezza */
+}
+
+footer .col {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+    text-align: center; /* Centra il testo in ogni colonna */
+}
+  
+body {
+  font-family: 'Fira Code', monospace;
+}
+
+h1, h2, h3, h4, h5, h6 ,p{
+  font-family: 'Fira Code', monospace;
+  font-weight: 500; /* Puoi cambiare il peso secondo le tue preferenze */
+}
+
+.code-section {
+  font-family: 'Fira Code', monospace;
+}
+
+.about-section {
+  position: relative;
+  height: 100vh; /* Assicura che la sezione copra tutta l'altezza del viewport */
+  overflow: hidden;
+}
+
+.img-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Posiziona l'immagine sotto il contenuto */
+}
+
+.img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Assicura che l'immagine copra l'intera area */
+}
+
+.text-container {
+  position: absolute;
+  top: 25%; /* Regola l'altezza del testo rispetto alla parte superiore dello schermo */
+  left: 30%; /* Regola la posizione orizzontale per centrare il testo */
+  max-width: 40%; /* Imposta la larghezza massima in proporzione allo schermo */
+  align-items: center;
+}
+
+.typing-effect {
+  color: black; /* Colore del testo, modificato in nero per il contrasto con lo sfondo bianco */
+  padding: 15px;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+
+/* INIZIO CARD */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px; /* Aggiungere padding per margini su schermi più piccoli */
+}
+
+.card-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Permette agli elementi di avvolgersi su più righe se necessario */
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.card {
+  flex: 1 1 300px; /* La card può ridursi fino a 300px */
+  max-width: 500px; /* Massima larghezza per evitare espansione eccessiva */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.5s ease;
+  margin: 10px; /* Aggiungere margini tra le card su schermi più piccoli */
+}
+.details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  text-align: left;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  z-index: 1; /* Assicurati che sia sopra gli altri elementi */
+}
+
+.card:hover .details {
+  opacity: 1;
+}
+
+.card-image {
+  width: 100%;
+  overflow: hidden;
+  transition: 0.5s;
+}
+
+.card-image img {
+  width: 100%;
+  height: auto;
+}
+
+.details, .skills-panel {
+  flex: 1;
+}
+
+.skills-panel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  opacity: 0;
+  display: none;
+  transition: opacity 0.5s ease;
+}
+
+@media (max-width: 768px) {
+  .card-wrapper {
+    flex-direction: column;
+  }
+  .skills-panel {
+    margin-top: 20px;
+  }
+}
+
+.skills-header {
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  color: #333;
+}
+
+.skills-columns {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.skills-category {
+  flex: 1;
+  min-width: 200px; /* Puoi regolare la larghezza minima in base alle necessità */
+  margin-right: 20px;
+}
+
+.skills-category h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.skills {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills li {
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+}
+
+.skills i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+.simple-icons--livewire {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12.001 0C6.174 0 1.448 4.957 1.448 11.072c0 2.09.552 4.042 1.51 5.71c.25.279.544.484.965.484c1.339 0 1.268-2.065 2.607-2.065s1.411 2.065 2.75 2.065c1.34 0 1.266-2.065 2.606-2.065c.584 0 .928.397 1.24.84c-.221-.205-.48-.348-.82-.348c-1.196 0-1.307 1.678-2.201 2.141v4.51a1.657 1.657 0 0 0 3.312 0V16.45c.308.433.647.815 1.22.815c1.34 0 1.267-2.065 2.606-2.065c.465 0 .774.255 1.04.58a1.1 1.1 0 0 0-.43-.088c-1.159 0-1.297 1.574-2.118 2.094v2.436a1.49 1.49 0 0 0 2.98 0V16.37c.324.466.67.895 1.278.895c.796 0 1.093-.73 1.485-1.32a11.5 11.5 0 0 0 1.074-4.874C22.552 4.957 17.828 0 12 0m-.566 2.877c2.88 0 5.214 2.784 5.214 5.807s-1.545 5.15-5.214 5.15s-5.215-2.127-5.215-5.15s2.335-5.807 5.215-5.807m-1.403 1.66a1.955 2.158 0 0 0-1.955 2.158a1.955 2.158 0 0 0 1.955 2.158a1.955 2.158 0 0 0 1.955-2.158a1.955 2.158 0 0 0-1.955-2.158m-.326.664a.978.996 0 0 1 .979.996a.978.996 0 0 1-.979.996a.978.996 0 0 1-.977-.996a.978.996 0 0 1 .977-.996m-2.95 10.493c-1.074 0-1.272 1.354-1.95 1.964v1.782a1.49 1.49 0 0 0 2.98 0v-3.182c-.264-.324-.577-.564-1.03-.564'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+
+/* {{-- SEZIONE PROGETTI --}} */
+.projects-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.github-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px; /* Puoi regolare il margine per distanziare dall'alto */
+}
+
+.github-button {
+  background-color: #24292e;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.github-button:hover {
+  background-color: #3b4045;
+}
+
+.loading-spinner {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top: 4px solid white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  margin-left: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.project-card {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card h3 {
+  margin: 10px 0;
+  font-size: 1.25rem;
+}
+
+.project-card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.project-card a {
+  display: inline-block;
+  margin-top: 15px;
+  color: #333;
+  text-decoration: none;
+}
+
+.project-card a:hover {
+  text-decoration: underline;
+}
+/* INIZIO CONTATTI */
+.contact-section {
+  padding: 60px 20px;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+.contact-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  font-weight: bold;
+  text-align: center; /* Centra il titolo */
+}
+
+.contact-section p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center; /* Centra il paragrafo */
+}
+
+
+
+
+
+
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+  opacity: 0; /* Nasconde le icone inizialmente per l'animazione */
+  transform: translateY(20px); /* Posizione iniziale per l'effetto slide-in */
+}
+
+.social-link i {
+  margin-right: 8px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black; /* Colore di default, sarà sovrascritto per ogni social */
+  font-size: 1.2rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.social-link i {
+  margin-right: 8px;
+}
+
+/* Colori specifici per ogni social network */
+.social-link.facebook {
+  color: #3b5998;
+}
+
+.social-link.instagram {
+  color: #fe227b;
+}
+
+.social-link.whatsapp {
+  color: #25D366;
+}
+
+.social-link.linkedin {
+  color: #0077b5;
+}
+
+.social-link:hover {
+  transform: scale(1.1) translateY(-5px);
+}
+
+
+
+.social-link:hover::after {
+  opacity: 1;
+}
+/* FINE CONTATTI */
+/* INIZIO VUOI SAPERNE DI PIù */
+.download-section {
+  padding: 60px 20px;
+  background-color: #f9f9f9;
+  position: relative;
+}
+
+.download-buttons {
+  margin-top: 20px;
+}
+
+.btn-download {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #3b4045;
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+.btn-download:hover {
+  background-color: #3b4045;
+}
+
+/* Stile per il razzo */
+.rocket {
+  font-size: 3rem; /* Aumenta la dimensione dell'icona */
+  position: absolute;
+  bottom: 10px; /* Imposta la posizione iniziale */
+  left: 50%;
+  transform: translateX(-50%);
+  display: none; /* Nascondi inizialmente */
+  color: #ff5722; /* Colore del razzo */
+  z-index: 1000; /* Assicurati che sia sopra gli altri elementi */
+  visibility: visible; /* Imposta la visibilità */
+}
+
+.rocket-fly {
+  animation: rocketAnimation 1s ease-out forwards;
+}
+
+@keyframes rocketAnimation {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate(-50%, -550px) rotate(45deg); /* Aumentato il valore per salire di più */
+  }
+  100% {
+    transform: translate(100vw, -500px) rotate(45deg); /* Continua verso l'angolo in alto a destra */
+  }
+}
+/* FINE VUOI SAPERNE DI PIù */
+/* INIZIO MEDIA QUE */
+@media (max-width: 767px) {
+  .about-section {
+    height: auto; /* Permetti alla sezione di adattarsi al contenuto */
+    padding-top: 80px; /* Aggiungi spazio per la navbar */
+  }
+
+  .img-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
+
+  .img-container img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+
+  .text-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+  .download-section .download-buttons {
+    display: flex;
+    flex-direction: column; /* Disposizione verticale per schermi piccoli */
+    align-items: center;
+}
+
+.download-section .btn-download {
+    display: block;
+    width: 80%; /* Imposta la larghezza del bottone */
+    max-width: 300px; /* Limita la larghezza massima */
+    margin: 10px 0; /* Aggiungi margine verticale per distanziare i bottoni */
+    padding: 15px; /* Aggiungi padding per migliorare l'aspetto */
+    font-size: 18px; /* Aumenta la dimensione del testo */
+}
+.skills-panel {
+  display: block !important; /* Mostra il pannello delle competenze */
+  opacity: 1 !important; /* Assicurati che sia completamente visibile */
+  transition: none; /* Rimuove le transizioni per evitare comportamenti strani */
+}
+}
+/* Media query per tablet */
+
+@media (max-width: 1024px) {
+  .card-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%; /* Adatta la larghezza della card al 100% */
+    margin: 20px 0; /* Margine superiore e inferiore */
+  }
+
+  .card-image img {
+    width: 100%; /* Imposta la larghezza dell'immagine al 100% */
+    height: 100%;
+
+  }
+
+  .details {
+    text-align: center;
+  }
+
+  .skills-category {
+    margin-bottom: 20px;
+  }
+  .img-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: 1;
+  }
+
+  .img-container img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+  }
+  .about-section {
+    height: auto; /* Permetti alla sezione di adattarsi al contenuto */
+    padding-top: 80px; /* Aggiungi spazio per la navbar */
+  }
+  .text-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: white;
+  }
+}
+/* Stili per display super grandi */
+@media (min-width: 2520px) {
+  body {
+      font-size: 1.75rem; /* Aumenta la dimensione base del font */
+  }
+  .img-logo {
+    width: 250px; /* Aumenta la larghezza del logo */
+    height: auto; /* Mantiene le proporzioni */
+  }
+
+  .navbar .navbar-message {
+      font-size: 2.5rem; /* Aumenta la dimensione del messaggio nella navbar */
+  }
+
+  .about-section .text-container p {
+      font-size: 3rem; /* Aumenta la dimensione del testo principale */
+      line-height: 1.6; /* Migliora la leggibilità */
+  }
+
+  .card-wrapper {
+      margin-top: -10%; /* Aumenta lo spazio sopra le card */
+  }
+
+  .card {
+      max-width: 800px; /* Aumenta la dimensione massima delle card */
+  }
+
+  .card img {
+      width: 100%; /* Assicura che l'immagine copra tutta la card */
+      height: auto; /* Mantiene le proporzioni dell'immagine */
+  }
+
+  .skills-panel h3, .skills-panel .skills-category h4, .skills-panel .skills li ,i {
+      font-size: 2.75rem; /* Aumenta la dimensione del testo nelle competenze */
+      font-size: 2rem;
+  }
+
+  .projects-section .section-title, .contact-section h2 {
+      font-size: 3.5rem; /* Aumenta la dimensione del titolo delle sezioni */
+  }
+
+  .contact-section p {
+      font-size: 1.75rem; /* Aumenta la dimensione del paragrafo */
+  }
+
+  .btn-download {
+      padding: 18px 36px; /* Aumenta la dimensione dei bottoni */
+      font-size: 1.75rem; /* Aumenta la dimensione del testo nei bottoni */
+  }
+
+  .navbar .navbar-brand img {
+     display: none;
+  }
+
+  .rocket {
+      font-size: 6rem; /* Aumenta la dimensione del razzo */
+  }
+  .img-container img {
+    background-size: contain; /* Assicura che l'intera immagine sia visibile */
+    background-position: center; /* Centra l'immagine */
+    height: auto; /* Permette all'altezza di adattarsi al contenuto */
+    min-height: 1900px; /* Imposta un'altezza minima */
+    margin-top: -10%;
+  }
+  .typing-effect{
+    margin-top:-20%
+  }
+  .github-button{
+  font-size: 2em;
+  }
+  .social-icons{
+    font-size: 3em;
+  }
+  .download-section{
+    height: 20vh;
+  }
+}
